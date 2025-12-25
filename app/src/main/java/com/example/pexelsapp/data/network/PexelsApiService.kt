@@ -1,8 +1,8 @@
-package com.example.pexelsapp.data
+package com.example.pexelsapp.data.network
 
-import com.example.pexelsapp.data.remoteEntity.featuredCollections.FeaturedCollectionsData
-import com.example.pexelsapp.data.remoteEntity.photos.PexelPageData
-import com.example.pexelsapp.data.remoteEntity.photos.PhotoData
+import com.example.pexelsapp.data.network.remoteEntity.featuredCollections.FeaturedCollectionsData
+import com.example.pexelsapp.data.network.remoteEntity.photos.PexelPageData
+import com.example.pexelsapp.data.network.remoteEntity.photos.PhotoData
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

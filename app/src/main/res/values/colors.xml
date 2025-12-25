@@ -8,5 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="windowSplashScreenBackground">#BB1020</color>
+    <color name="defaultAppColor">#BB1020</color>
+
 </resources>

@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    id("com.google.dagger.hilt.android")
     kotlin("kapt")
 }
 
@@ -86,7 +87,11 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
-
+    implementation(libs.hilt)
+    kapt(libs.hilt.compiler)
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     jvmTarget = "17"

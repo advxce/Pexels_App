@@ -1,4 +1,4 @@
-package com.example.pexelsapp.data.remoteEntity.photos
+package com.example.pexelsapp.data.network.remoteEntity.photos
 
 import kotlinx.serialization.Serializable
 
