@@ -1,8 +1,17 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
+    kotlin("kapt")
 }
+
+val userProperties = Properties()
+userProperties.load(FileInputStream(rootProject.file("local.properties")))
+val apiKey = userProperties.getProperty("PEXELS_API_KEY") ?: ""
 
 android {
     namespace = "com.example.pexelsapp"
@@ -19,12 +28,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("Boolean", "IS_DEBUG", "true")
+            buildConfigField("String", "API_KEY", apiKey)
+        }
         release {
+            buildConfigField("Boolean", "IS_DEBUG", "false")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
     compileOptions {
@@ -36,7 +51,12 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
+}
+detekt {
+    config = files("$rootDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
 }
 
 dependencies {
@@ -57,5 +77,17 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    implementation("androidx.core:core-splashscreen:1.2.0")
+    implementation(libs.androidx.splashscreen)
+    implementation(platform(libs.network.okhttp.bom))
+    implementation(libs.network.okhttp)
+    implementation(libs.network.okhttp.logging.interceptor)
+    implementation(libs.network.retrofit)
+    implementation(libs.network.retrofit.converter.gson)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network)
+
+}
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+    jvmTarget = "17"
 }
