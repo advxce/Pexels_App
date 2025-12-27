@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Pexels App</string>
+    <string name="searchHint">Search</string>
+    <string name="default_author">Name Surname</string>
+    <string name="backBtnDescription">Back</string>
+    <string name="downloadBtnDescription">Download</string>
+    <string name="download">Download</string>
+    <string name="no_connection">No connection</string>
+    <string name="empty_txt">You haven\'t saved anything yet</string>
+    <string name="no_result_found">No result found</string>
+    <string name="image_not_found">Image not found</string>
+    <string name="explore">Explore</string>
 </resources>

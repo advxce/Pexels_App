@@ -9,5 +9,11 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="defaultAppColor">#BB1020</color>
+    <color name="unableItemColor">#868686</color>
+    <color name="itemsBackground">#F3F5F9</color>
+    <color name="chipColorText">#1E1E1E</color>
+    <color name="authorSectionColor">#66000000</color>
+    <color name="authorSectionTextColor">#FFFFFF</color>
+    <color name="tintBookmark">#1E1E1E</color>
 
 </resources>

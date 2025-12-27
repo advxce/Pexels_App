@@ -1,22 +1,24 @@
 package com.example.pexelsapp.domain.usecases
 
+import com.example.pexelsapp.data.mappers.toDomain
 import com.example.pexelsapp.domain.entities.Photo
+import com.example.pexelsapp.domain.repository.LocalPhotoRepository
 import com.example.pexelsapp.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 interface GetPhotoByIdUseCase {
 
-    suspend operator fun invoke(id: Int): Photo
+    operator fun invoke(id: Int): Flow<Photo>
 
 }
 
 class GetPhotoByIdUseCaseImpl @Inject constructor(
-    private val remoteRepository: RemoteRepository
+    private val localPhotoRepository: LocalPhotoRepository
 ) : GetPhotoByIdUseCase {
-    override suspend fun invoke(id: Int): Photo = withContext(Dispatchers.IO) {
-        return@withContext remoteRepository.getPhotoById(id)
-    }
+    override fun invoke(id: Int): Flow<Photo> =
+         localPhotoRepository.getPhotoById(id)
 
 }

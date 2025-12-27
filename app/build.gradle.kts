@@ -56,7 +56,7 @@ android {
     }
 }
 detekt {
-    config = files("$rootDir/config/detekt/detekt.yml")
+    config.setFrom(files("$rootDir/config/detekt/detekt.yml"))
     buildUponDefaultConfig = true
 }
 
@@ -89,9 +89,14 @@ dependencies {
     implementation(libs.coil.network)
     implementation(libs.hilt)
     kapt(libs.hilt.compiler)
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose")
-    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
-    implementation("androidx.compose.material:material-icons-extended:1.7.8")
+    implementation(libs.androidx.viewmodel.compose)
+    implementation(libs.hilt.compose)
+    implementation(libs.androidx.material.icons)
+    implementation(libs.room.runtime)
+    kapt(libs.room.compiler)
+    annotationProcessor(libs.room.compiler)
+    implementation(libs.room.ktx)
+    implementation("androidx.navigation:navigation-compose:2.9.6")
 }
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     jvmTarget = "17"

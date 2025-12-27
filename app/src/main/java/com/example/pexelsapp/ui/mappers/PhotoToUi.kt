@@ -7,5 +7,6 @@ fun Photo.toUi(): PhotoUi =
     PhotoUi(
         id = id,
         src = src,
+        photographer = photographer,
         bookmarked = bookmarked
     )

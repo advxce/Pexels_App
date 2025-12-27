@@ -1,12 +1,13 @@
 package com.example.pexelsapp.ui.viewModels
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCase
 import com.example.pexelsapp.domain.usecases.GetPhotosUseCase
 import com.example.pexelsapp.domain.usecases.SearchByCategoryUseCase
-import com.example.pexelsapp.ui.entities.PexelPageState
-import com.example.pexelsapp.ui.entities.FeaturedCollectionsUi
+import com.example.pexelsapp.ui.entities.CollectionUi
+import com.example.pexelsapp.ui.statesUi.PexelPageState
 import com.example.pexelsapp.ui.mappers.toUi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -21,42 +22,52 @@ class HomeViewModel @Inject constructor(
     private val getPhotosUseCase: GetPhotosUseCase,
     private val getFeaturedCollectionUseCase: GetFeaturedCollectionUseCase,
     private val searchByCategoryUseCase: SearchByCategoryUseCase
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<PexelPageState>(PexelPageState.Loading)
     val uiState: StateFlow<PexelPageState> = _uiState.asStateFlow()
 
-    private val _featuredCollections = MutableStateFlow<FeaturedCollectionsUi?>(null)
-    val featuredCollections: StateFlow<FeaturedCollectionsUi?> = _featuredCollections.asStateFlow()
+    private val _featuredCollections = MutableStateFlow<List<CollectionUi>>(emptyList())
+    val featuredCollections: StateFlow<List<CollectionUi>> = _featuredCollections.asStateFlow()
 
-    fun getPhotos(page:Int){
+    fun getPhotos(page: Int) {
         viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = PexelPageState.Loading
             try {
-                val photos = getPhotosUseCase(page)
-                _uiState.value = PexelPageState.Success(photos.toUi())
-                //сделать проверку на пустоту
-            } catch (_:Exception){
+                val photos = getPhotosUseCase(page).map { it.toUi() }
+                if (photos.isEmpty()) {
+                    _uiState.value = PexelPageState.isEmpty
+                } else {
+                    _uiState.value = PexelPageState.Success(photos)
+                }
+            } catch (_: Exception) {
                 _uiState.value = PexelPageState.Error("Problems, with connection")
             }
         }
     }
 
-    fun getCollection(){
+    fun getCollection() {
         viewModelScope.launch(Dispatchers.Main) {
-            val collections = getFeaturedCollectionUseCase()
-            _featuredCollections.value = collections.toUi()
+            val collections = getFeaturedCollectionUseCase().map { it.toUi() }
+            _featuredCollections.value = collections
         }
     }
 
-    fun getFilteredPhotos(category:String){
+    fun getFilteredPhotos(category: String) {
+        if (category.isBlank()) {
+            getPhotos(1)
+            return
+        }
         viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = PexelPageState.Loading
             try {
-                val filteredPhotos = searchByCategoryUseCase(category).toUi()
-                _uiState.value = PexelPageState.Success(filteredPhotos)
-                //сделать проверку на пустоту
-            } catch (_:Exception){
+                val filteredPhotos = searchByCategoryUseCase(category).map { it.toUi() }
+                if (filteredPhotos.isEmpty()) {
+                    _uiState.value = PexelPageState.isEmpty
+                } else {
+                    _uiState.value = PexelPageState.Success(filteredPhotos)
+                }
+            } catch (_: Exception) {
                 _uiState.value = PexelPageState.Error("Problems, with connection")
             }
         }

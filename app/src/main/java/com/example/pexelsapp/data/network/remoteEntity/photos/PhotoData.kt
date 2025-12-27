@@ -5,5 +5,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PhotoData(
     val id:Int,
-    val src: SrcData
+    val src: SrcData,
+    val photographer: String,
 )
