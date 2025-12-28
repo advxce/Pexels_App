@@ -33,12 +33,14 @@ class HomeViewModel @Inject constructor(
     fun getPhotos(page: Int) {
         viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = PexelPageState.Loading
+            Log.i("State", "loading ${_uiState.value}")
             try {
                 val photos = getPhotosUseCase(page).map { it.toUi() }
                 if (photos.isEmpty()) {
                     _uiState.value = PexelPageState.isEmpty
                 } else {
                     _uiState.value = PexelPageState.Success(photos)
+                    Log.i("State", "success ${_uiState.value}")
                 }
             } catch (_: Exception) {
                 _uiState.value = PexelPageState.Error("Problems, with connection")

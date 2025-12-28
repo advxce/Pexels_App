@@ -32,7 +32,7 @@ fun PhotoListScreen(
         verticalItemSpacing = 12.dp,
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 24.dp, vertical = 8.dp)
+            .padding(start = 24.dp, end = 24.dp, top = 8.dp)
     ) {
         items(items = photoList) { photo ->
             Box(

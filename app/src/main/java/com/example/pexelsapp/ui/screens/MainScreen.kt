@@ -19,9 +19,12 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.pexelsapp.ui.components.BottomNavigationBar
 import com.example.pexelsapp.ui.routes.Route
+import com.example.pexelsapp.ui.viewModels.HomeViewModel
 
 @Composable
-fun MainScreen() {
+fun MainScreen(
+    homeViewModel: HomeViewModel,
+) {
     val navController = rememberNavController()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -52,12 +55,13 @@ fun MainScreen() {
             navController = navController,
             startDestination = Route.Home.route,
             modifier = Modifier.padding(
-                top = paddingValues.calculateTopPadding().minus(32.dp),
+                top = paddingValues.calculateTopPadding(),
                 bottom = paddingValues.calculateTopPadding()
             )
         ) {
             composable(Route.Home.route) {
                 HomeScreen(
+                    viewModel = homeViewModel,
                     onOpenDetails = { photoId ->
                         navController.navigate(Route.Details.create(photoId))
                     }
