@@ -15,9 +15,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.ColorPainter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import coil3.compose.AsyncImagePainter
+import coil3.compose.rememberAsyncImagePainter
+import com.example.pexelsapp.ui.components.PhotoComponent
+import com.example.pexelsapp.ui.components.ShimmerPlaceholder
 import com.example.pexelsapp.ui.entities.PhotoUi
 
 @Composable
@@ -40,23 +46,13 @@ fun PhotoListScreen(
                     .clickable { onItemClick(photo) }
 
             ) {
-                AsyncImage(
-                    model = photo.src,
-                    contentDescription = null,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(20.dp)),
-                    contentScale = ContentScale.Crop
+                PhotoComponent(url = photo.src)
 
-                )
                 Box(
-                    modifier = Modifier
-                        .matchParentSize(),
+                    modifier = Modifier.matchParentSize(),
                     contentAlignment = Alignment.BottomCenter
                 ) {
-                    itemContent?.invoke(
-                        photo.photographer
-                    )
+                    itemContent?.invoke(photo.photographer)
                 }
             }
 

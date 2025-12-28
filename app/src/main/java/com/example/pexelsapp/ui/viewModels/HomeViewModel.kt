@@ -1,5 +1,6 @@
 package com.example.pexelsapp.ui.viewModels
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,8 +8,10 @@ import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCase
 import com.example.pexelsapp.domain.usecases.GetPhotosUseCase
 import com.example.pexelsapp.domain.usecases.SearchByCategoryUseCase
 import com.example.pexelsapp.ui.entities.CollectionUi
+import com.example.pexelsapp.ui.entities.PhotoUi
 import com.example.pexelsapp.ui.statesUi.PexelPageState
 import com.example.pexelsapp.ui.mappers.toUi
+import com.example.pexelsapp.ui.utils.NetworkUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,20 +33,30 @@ class HomeViewModel @Inject constructor(
     private val _featuredCollections = MutableStateFlow<List<CollectionUi>>(emptyList())
     val featuredCollections: StateFlow<List<CollectionUi>> = _featuredCollections.asStateFlow()
 
-    fun getPhotos(page: Int) {
+    private var cachedPhotos: List<PhotoUi> = emptyList()
+    private var lastQuery: String? = null
+
+
+    fun getPhotos(page: Int, context: Context) {
         viewModelScope.launch(Dispatchers.Main) {
             _uiState.value = PexelPageState.Loading
-            Log.i("State", "loading ${_uiState.value}")
+
             try {
                 val photos = getPhotosUseCase(page).map { it.toUi() }
+                cachedPhotos = photos
                 if (photos.isEmpty()) {
                     _uiState.value = PexelPageState.isEmpty
                 } else {
                     _uiState.value = PexelPageState.Success(photos)
-                    Log.i("State", "success ${_uiState.value}")
                 }
             } catch (_: Exception) {
-                _uiState.value = PexelPageState.Error("Problems, with connection")
+                val hasInternet = NetworkUtils.isConnected(context)
+                if (!hasInternet && cachedPhotos.isNotEmpty()) {
+                    _uiState.value = PexelPageState.Success(cachedPhotos)
+                    _uiState.value = PexelPageState.NoConnectionWithCache
+                } else {
+                    _uiState.value = PexelPageState.Error("Problems, with connection")
+                }
             }
         }
     }
@@ -55,9 +68,9 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getFilteredPhotos(category: String) {
+    fun getFilteredPhotos(category: String, context: Context) {
         if (category.isBlank()) {
-            getPhotos(1)
+            getPhotos(1, context = context)
             return
         }
         viewModelScope.launch(Dispatchers.Main) {
@@ -73,6 +86,12 @@ class HomeViewModel @Inject constructor(
                 _uiState.value = PexelPageState.Error("Problems, with connection")
             }
         }
+    }
+    fun retry(context: android.content.Context) {
+        lastQuery?.let {
+            if (it.isNotBlank()) getFilteredPhotos(it, context)
+            else getPhotos(1, context)
+        } ?: getPhotos(1, context)
     }
 
 }

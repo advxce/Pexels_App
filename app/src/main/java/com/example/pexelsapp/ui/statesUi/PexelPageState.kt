@@ -7,4 +7,5 @@ sealed class PexelPageState {
     object Loading: PexelPageState()
     data class Error(val msg:String): PexelPageState()
     object isEmpty: PexelPageState()
+    object NoConnectionWithCache: PexelPageState()
 }
