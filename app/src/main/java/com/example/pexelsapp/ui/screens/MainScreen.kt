@@ -21,7 +21,7 @@ import com.example.pexelsapp.ui.components.BottomNavigationBar
 import com.example.pexelsapp.ui.routes.Route
 
 @Composable
-fun MainScreen(){
+fun MainScreen() {
     val navController = rememberNavController()
 
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -30,9 +30,9 @@ fun MainScreen(){
 
     Scaffold(
         bottomBar = {
-            if(bottomBar){
+            if (bottomBar) {
                 BottomNavigationBar(
-                    selectedItem = when (currentRoute){
+                    selectedItem = when (currentRoute) {
                         Route.Bookmarks.route -> 1
                         else -> 0
                     },
@@ -47,12 +47,15 @@ fun MainScreen(){
                 )
             }
         }
-    ) { paddingValues->
+    ) { paddingValues ->
         NavHost(
             navController = navController,
             startDestination = Route.Home.route,
-            modifier = Modifier.padding(top = paddingValues.calculateTopPadding().minus(32.dp))
-        ){
+            modifier = Modifier.padding(
+                top = paddingValues.calculateTopPadding().minus(32.dp),
+                bottom = paddingValues.calculateTopPadding()
+            )
+        ) {
             composable(Route.Home.route) {
                 HomeScreen(
                     onOpenDetails = { photoId ->
