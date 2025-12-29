@@ -5,7 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.pexelsapp.data.database.localEntity.CollectionEntity
-import com.example.pexelsapp.data.database.localEntity.PhotoEntity
+
 
 @Dao
 interface CollectionDao {

@@ -2,7 +2,6 @@ package com.example.pexelsapp.domain.usecases
 
 import com.example.pexelsapp.data.mappers.toDomain
 import com.example.pexelsapp.domain.entities.CollectionDomain
-import com.example.pexelsapp.domain.entities.FeaturedCollections
 import com.example.pexelsapp.domain.repository.LocalCollectionRepository
 import com.example.pexelsapp.domain.repository.RemoteRepository
 import kotlinx.coroutines.Dispatchers

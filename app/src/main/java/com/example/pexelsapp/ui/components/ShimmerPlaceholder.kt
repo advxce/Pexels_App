@@ -13,6 +13,8 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
+import com.example.pexelsapp.R
 
 
 @Composable
@@ -27,7 +29,7 @@ fun ShimmerPlaceholder(
             animation = tween(1000),
             repeatMode = RepeatMode.Reverse
         ),
-        label = "shimmer"
+        label = stringResource(R.string.shimmer)
     )
 
     Box(

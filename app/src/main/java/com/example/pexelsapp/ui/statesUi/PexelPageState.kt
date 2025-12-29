@@ -6,6 +6,6 @@ sealed class PexelPageState {
     data class Success(val list: List<PhotoUi>): PexelPageState()
     object Loading: PexelPageState()
     data class Error(val msg:String): PexelPageState()
-    object isEmpty: PexelPageState()
+    object IsEmpty: PexelPageState()
     object NoConnectionWithCache: PexelPageState()
 }

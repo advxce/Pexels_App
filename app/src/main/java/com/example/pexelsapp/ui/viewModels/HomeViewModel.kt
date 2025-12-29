@@ -1,7 +1,6 @@
 package com.example.pexelsapp.ui.viewModels
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCase
@@ -45,7 +44,7 @@ class HomeViewModel @Inject constructor(
                 val photos = getPhotosUseCase(page).map { it.toUi() }
                 cachedPhotos = photos
                 if (photos.isEmpty()) {
-                    _uiState.value = PexelPageState.isEmpty
+                    _uiState.value = PexelPageState.IsEmpty
                 } else {
                     _uiState.value = PexelPageState.Success(photos)
                 }
@@ -78,7 +77,7 @@ class HomeViewModel @Inject constructor(
             try {
                 val filteredPhotos = searchByCategoryUseCase(category).map { it.toUi() }
                 if (filteredPhotos.isEmpty()) {
-                    _uiState.value = PexelPageState.isEmpty
+                    _uiState.value = PexelPageState.IsEmpty
                 } else {
                     _uiState.value = PexelPageState.Success(filteredPhotos)
                 }
@@ -87,7 +86,7 @@ class HomeViewModel @Inject constructor(
             }
         }
     }
-    fun retry(context: android.content.Context) {
+    fun retry(context: Context) {
         lastQuery?.let {
             if (it.isNotBlank()) getFilteredPhotos(it, context)
             else getPhotos(1, context)

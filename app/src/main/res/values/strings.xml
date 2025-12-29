@@ -11,4 +11,7 @@
     <string name="image_not_found">Image not found</string>
     <string name="explore">Explore</string>
     <string name="no_connection_but_enable_cache">No connection with Internet. Show cached photos</string>
+    <string name="bookmarks">Bookmarks</string>
+    <string name="shimmer">shimmer</string>
+    <string name="clear">Clear</string>
 </resources>

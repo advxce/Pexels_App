@@ -1,12 +1,9 @@
 package com.example.pexelsapp.data.database
 
 import com.example.pexelsapp.data.database.dao.CollectionDao
-import com.example.pexelsapp.data.database.localEntity.CollectionEntity
-import com.example.pexelsapp.data.database.localEntity.PhotoEntity
 import com.example.pexelsapp.data.mappers.toDomain
 import com.example.pexelsapp.data.mappers.toEntity
 import com.example.pexelsapp.domain.entities.CollectionDomain
-import com.example.pexelsapp.domain.entities.Photo
 import com.example.pexelsapp.domain.repository.LocalCollectionRepository
 import javax.inject.Inject
 

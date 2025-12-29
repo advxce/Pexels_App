@@ -1,6 +1,5 @@
 package com.example.pexelsapp.domain.repository
 
-import com.example.pexelsapp.data.database.localEntity.PhotoEntity
 import com.example.pexelsapp.domain.entities.Photo
 import kotlinx.coroutines.flow.Flow
 

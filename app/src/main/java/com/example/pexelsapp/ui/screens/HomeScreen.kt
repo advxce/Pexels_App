@@ -63,7 +63,7 @@ fun HomeScreen(
                     })
                 }
 
-                is PexelPageState.isEmpty -> {
+                is PexelPageState.IsEmpty -> {
                     EmptyHome(
                         onExplore = { viewModel.getPhotos(1, context) }
                     )

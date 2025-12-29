@@ -8,9 +8,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.pexelsapp.R
 import com.example.pexelsapp.ui.components.EmptyBookmarks
 import com.example.pexelsapp.ui.components.PhotographerImageTitleComponent
 import com.example.pexelsapp.ui.theme.MulishBoldStyle
@@ -30,7 +32,7 @@ fun BookmarkScreen(
 
     Column {
         Text(
-            text = "Bookmarks",
+            text = stringResource(R.string.bookmarks),
             style = MulishBoldStyle,
             textAlign = TextAlign.Center,
             modifier = Modifier

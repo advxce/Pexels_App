@@ -97,7 +97,6 @@ dependencies {
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.ktx)
     implementation("androidx.navigation:navigation-compose:2.9.6")
-    implementation("androidx.compose.foundation:foundation:1.10.0" )
 }
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     jvmTarget = "17"

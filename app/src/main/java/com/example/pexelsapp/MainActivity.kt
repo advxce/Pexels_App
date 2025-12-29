@@ -5,12 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.pexelsapp.ui.screens.MainScreen
 import com.example.pexelsapp.ui.statesUi.PexelPageState
 import com.example.pexelsapp.ui.theme.PexelsAppTheme
@@ -30,7 +25,6 @@ class MainActivity : ComponentActivity() {
         val splashScreen = installSplashScreen()
         splashScreen.setKeepOnScreenCondition {
             val current = homeViewModel.uiState.value
-//            android.util.Log.d("SplashState", "🌀 Current UI state: $current")
             current is PexelPageState.Loading
         }
         splashScreen.setOnExitAnimationListener { splashScreenViewProvider ->

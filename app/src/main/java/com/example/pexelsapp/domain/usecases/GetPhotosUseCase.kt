@@ -25,11 +25,9 @@ class GetPhotosUseCaseImpl @Inject constructor(
         if (cachedPhotos.isNotEmpty()) {
             return@withContext cachedPhotos
         }
-        Log.i("Data", "cached ${cachedPhotos.size}")
         val remotePhotos = remoteRepository.getPhotos(page).map { it.toDomain() }
         val entitiesPhotos = remotePhotos
         localPhotoRepository.insertPhotos(entitiesPhotos)
-        Log.i("Data", "remote ${remotePhotos.size}")
         return@withContext remotePhotos
     }
 }

@@ -34,7 +34,7 @@ fun EmptyBookmarks(
         Spacer(modifier = Modifier
             .height(8.dp))
         Text(
-            text = "Explore",
+            text = stringResource(R.string.explore),
             style = MulishBoldStyle,
             color = colorResource(R.color.defaultAppColor),
             modifier = Modifier

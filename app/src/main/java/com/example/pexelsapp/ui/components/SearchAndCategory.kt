@@ -21,7 +21,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -125,7 +124,7 @@ fun SearchAndCategoriesBar(
                 if (query.text.isNotEmpty()) {
                     Icon(
                         imageVector = Icons.Default.Clear,
-                        contentDescription = "Clear",
+                        contentDescription = stringResource(R.string.clear),
                         tint = colorResource(R.color.defaultAppColor),
                         modifier = Modifier
                             .size(24.dp)
