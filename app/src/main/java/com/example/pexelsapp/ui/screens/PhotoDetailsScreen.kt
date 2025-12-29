@@ -26,6 +26,7 @@ import com.example.pexelsapp.ui.components.BookmarkComponent
 import com.example.pexelsapp.ui.components.DownloadButton
 import com.example.pexelsapp.ui.components.EmptyDetails
 import com.example.pexelsapp.ui.components.NetworkStub
+import com.example.pexelsapp.ui.components.PhotoComponent
 import com.example.pexelsapp.ui.components.ProgressIndicatorComponent
 import com.example.pexelsapp.ui.components.TopBar
 import com.example.pexelsapp.ui.statesUi.PhotoState
@@ -88,13 +89,14 @@ fun PhotoDetailsScreen(
                             .padding(horizontal = 24.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        AsyncImage(
-                            model = state.photo.src,
-                            contentDescription = "Photo",
+
+                        PhotoComponent(
+                            state.photo.src,
+                            contentScale = ContentScale.Fit,
+                            isZoomable = true,
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(20.dp)),
-                            contentScale = ContentScale.Fit
                         )
                     }
 
