@@ -1,7 +1,7 @@
 package com.example.pexelsapp.domain.usecases
 
 import com.example.pexelsapp.domain.entities.Photo
-import com.example.pexelsapp.domain.repository.LocalPhotoRepository
+import com.example.pexelsapp.domain.repository.PhotoRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -12,9 +12,9 @@ interface GetPhotoByIdUseCase {
 }
 
 class GetPhotoByIdUseCaseImpl @Inject constructor(
-    private val localPhotoRepository: LocalPhotoRepository
+    private val photoRepository: PhotoRepository
 ) : GetPhotoByIdUseCase {
     override fun invoke(id: Int): Flow<Photo> =
-         localPhotoRepository.getPhotoById(id)
+         photoRepository.getPhotoById(id)
 
 }

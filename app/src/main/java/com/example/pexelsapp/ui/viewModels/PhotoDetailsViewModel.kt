@@ -3,11 +3,12 @@ package com.example.pexelsapp.ui.viewModels
 import android.app.DownloadManager
 import android.content.Context
 import android.os.Environment
-import android.util.Log
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pexelsapp.domain.usecases.GetPhotoByIdUseCase
 import com.example.pexelsapp.domain.usecases.UpdateBookmarkUseCase
+import com.example.pexelsapp.ui.entities.PhotoUi
 import com.example.pexelsapp.ui.mappers.toUi
 import com.example.pexelsapp.ui.statesUi.PhotoState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,8 +18,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import androidx.core.net.toUri
-import com.example.pexelsapp.ui.entities.PhotoUi
 
 @HiltViewModel
 class PhotoDetailsViewModel @Inject constructor(

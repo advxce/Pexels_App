@@ -1,7 +1,7 @@
 package com.example.pexelsapp.domain.usecases
 
 import com.example.pexelsapp.domain.entities.Photo
-import com.example.pexelsapp.domain.repository.LocalPhotoRepository
+import com.example.pexelsapp.domain.repository.PhotoRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
@@ -12,12 +12,12 @@ interface UpdateBookmarkUseCase {
 }
 
 class UpdateBookmarkUseCaseImpl @Inject constructor(
-    private val localPhotoRepository: LocalPhotoRepository
+    private val photoRepository: PhotoRepository
 ) : UpdateBookmarkUseCase{
     override suspend fun invoke(photoId: Int): Photo = withContext(Dispatchers.IO) {
-        val currentPhoto = localPhotoRepository.getPhotoById(photoId).first()
+        val currentPhoto = photoRepository.getPhotoById(photoId).first()
         val updatedPhoto = currentPhoto.copy(bookmarked = !currentPhoto.bookmarked)
-        localPhotoRepository.updateBookmark(updatedPhoto)
+        photoRepository.updateBookmark(updatedPhoto)
         return@withContext updatedPhoto
     }
 

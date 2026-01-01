@@ -3,7 +3,7 @@ package com.example.pexelsapp.ui.viewModels
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCase
+import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionsUseCase
 import com.example.pexelsapp.domain.usecases.GetPhotosUseCase
 import com.example.pexelsapp.domain.usecases.SearchByCategoryUseCase
 import com.example.pexelsapp.ui.entities.CollectionUi
@@ -22,7 +22,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val getPhotosUseCase: GetPhotosUseCase,
-    private val getFeaturedCollectionUseCase: GetFeaturedCollectionUseCase,
+    private val getFeaturedCollectionsUseCase: GetFeaturedCollectionsUseCase,
     private val searchByCategoryUseCase: SearchByCategoryUseCase
 ) : ViewModel() {
 
@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
 
     fun getCollection() {
         viewModelScope.launch(Dispatchers.Main) {
-            val collections = getFeaturedCollectionUseCase().map { it.toUi() }
+            val collections = getFeaturedCollectionsUseCase().map { it.toUi() }
             _featuredCollections.value = collections
         }
     }

@@ -1,10 +1,9 @@
 package com.example.pexelsapp.di
 
-import com.example.pexelsapp.domain.repository.LocalCollectionRepository
-import com.example.pexelsapp.domain.repository.LocalPhotoRepository
-import com.example.pexelsapp.domain.repository.RemoteRepository
-import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCase
-import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionUseCaseImpl
+import com.example.pexelsapp.domain.repository.CollectionRepository
+import com.example.pexelsapp.domain.repository.PhotoRepository
+import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionsUseCase
+import com.example.pexelsapp.domain.usecases.GetFeaturedCollectionsUseCaseImpl
 import com.example.pexelsapp.domain.usecases.GetPhotoByIdUseCase
 import com.example.pexelsapp.domain.usecases.GetPhotoByIdUseCaseImpl
 import com.example.pexelsapp.domain.usecases.GetPhotosUseCase
@@ -25,33 +24,30 @@ object UseCaseModule {
 
     @Provides
     fun provideGetFeaturedCollectionUseCase(
-        remoteRepository: RemoteRepository,
-        localCollectionRepository: LocalCollectionRepository
-    ): GetFeaturedCollectionUseCase =
-        GetFeaturedCollectionUseCaseImpl(remoteRepository, localCollectionRepository)
+        collectionRepository: CollectionRepository
+    ): GetFeaturedCollectionsUseCase =
+        GetFeaturedCollectionsUseCaseImpl(collectionRepository)
 
     @Provides
-    fun provideGetPhotosByIdUseCase(localPhotoRepository: LocalPhotoRepository): GetPhotoByIdUseCase =
-        GetPhotoByIdUseCaseImpl(localPhotoRepository)
+    fun provideGetPhotosByIdUseCase(photoRepository: PhotoRepository): GetPhotoByIdUseCase =
+        GetPhotoByIdUseCaseImpl(photoRepository)
 
     @Provides
     fun provideGetPhotosUseCase(
-        remoteRepository: RemoteRepository,
-        localPhotoRepository: LocalPhotoRepository
+        photoRepository: PhotoRepository
     ): GetPhotosUseCase =
-        GetPhotosUseCaseImpl(remoteRepository, localPhotoRepository)
+        GetPhotosUseCaseImpl(photoRepository)
 
     @Provides
     fun provideSearchByCategoryUseCase(
-        remoteRepository: RemoteRepository,
-        localPhotoRepository: LocalPhotoRepository
+        photoRepository: PhotoRepository
     ): SearchByCategoryUseCase =
-        SearchByCategoryUseCaseImpl(remoteRepository, localPhotoRepository)
+        SearchByCategoryUseCaseImpl(photoRepository)
 
     @Provides
     fun provideUpdateBookmarkUseCase(
-        localPhotoRepository: LocalPhotoRepository
+        photoRepository: PhotoRepository
     ): UpdateBookmarkUseCase =
-        UpdateBookmarkUseCaseImpl(localPhotoRepository)
+        UpdateBookmarkUseCaseImpl(photoRepository)
 
 }

@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.google.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -96,7 +97,7 @@ dependencies {
     kapt(libs.room.compiler)
     annotationProcessor(libs.room.compiler)
     implementation(libs.room.ktx)
-    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation(libs.navigation.compose)
 }
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
     jvmTarget = "17"

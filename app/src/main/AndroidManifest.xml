@@ -10,19 +10,18 @@
 
     <application
         android:allowBackup="true"
-        android:name=".Application"
+        android:name=".ui.app.Application"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/app_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PexelsApp"
-        tools:targetApi="31">
+        android:theme="@style/Theme.PexelsApp.Splash"
+        tools:targetApi="36">
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.PexelsApp.Splash">
+            android:name=".ui.app.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
