@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.PexelsApp.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/windowSplashScreenBackground</item>
+        <item name="windowSplashScreenBackground">@color/defaultAppColor</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_screen_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.PexelsApp</item>
 
+        <item name="windowSplashScreenIconBackgroundColor">@color/defaultAppColor</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="postSplashScreenTheme">@style/Theme.PexelsApp</item>
     </style>
 </resources>
