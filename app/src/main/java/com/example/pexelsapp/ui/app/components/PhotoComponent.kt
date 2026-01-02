@@ -16,7 +16,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil3.compose.SubcomposeAsyncImage
-import com.example.pexelsapp.ui.screens.photoDetails.components.ShimmerPlaceholder
 import kotlinx.coroutines.launch
 
 @Composable
@@ -63,4 +62,6 @@ fun PhotoComponent(
         loading = { ShimmerPlaceholder(Modifier.matchParentSize()) },
         error = { ShimmerPlaceholder(Modifier.matchParentSize()) }
     )
+
+
 }

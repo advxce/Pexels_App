@@ -1,4 +1,4 @@
-package com.example.pexelsapp.ui.screens.photoDetails.components
+package com.example.pexelsapp.ui.app.components
 
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.animateFloat

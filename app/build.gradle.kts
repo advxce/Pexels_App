@@ -5,8 +5,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("io.gitlab.arturbosch.detekt") version "1.23.6"
-    id("com.google.dagger.hilt.android")
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.dagger.hilt)
     kotlin("kapt")
 }
 
